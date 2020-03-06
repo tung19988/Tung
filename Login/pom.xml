@@ -14,6 +14,9 @@
 	<name>Login</name>
 	<description>Demo project for Spring Boot</description>
 
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -26,9 +29,9 @@
 		</dependency>
 		
 		<dependency>
-    <groupId>commons-configuration</groupId>
-    <artifactId>commons-configuration</artifactId>
-    <version>1.6</version>
+	<groupId>commons-configuration</groupId>
+	<artifactId>commons-configuration</artifactId>
+	<version>1.10</version>
 </dependency>
 
 		<dependency>

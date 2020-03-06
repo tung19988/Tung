@@ -30,6 +30,7 @@ import com.mediasoft.Login.Dao.CheckUserDao;
 import com.mediasoft.Login.Dao.TimerDao;
 import com.mediasoft.Login.Entity.JwtRequest;
 import com.mediasoft.Login.Entity.ObjectToken;
+import com.mediasoft.Login.Entity.SetTime;
 import com.mediasoft.Login.Entity.UserDTO;
 import com.mediasoft.Login.Service.UserRepository;
 
@@ -101,7 +102,7 @@ public class LoginController {
 			return us;
 	}
 	
-	@RequestMapping(value = "/show/{token}", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkExprientToken/{token}", method = RequestMethod.GET)
 	public UserDTO show(@PathVariable("token") String token) {	
 		
 			ObjectToken  obj1 = (ObjectToken)table.get(token);
@@ -120,7 +121,7 @@ public class LoginController {
 
 	}
 	
-	@RequestMapping(value = "/show1/{token}", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkTimeoutToken/{token}", method = RequestMethod.GET)
 	public Object show1(@PathVariable("token") String token) {	
 		
 			Date date = new Date();
@@ -144,13 +145,6 @@ public class LoginController {
 	
 	@RequestMapping(value = "/showToken", method = RequestMethod.GET)
 	public List<UserDTO> show() {	
-//		Enumeration<String> enu = table.keys(); 
-//		List<String> list = new ArrayList<String>();
-//		while (enu.hasMoreElements()) { 
-//			
-//		  String b =	enu.nextElement(); 
-//		  list.add(b);
-//        } 
 		
 		List<UserDTO> list = new ArrayList<UserDTO>();
 		Enumeration<String> enu = table.keys();
@@ -163,12 +157,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/settime", method = RequestMethod.POST , consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public Integer show2(@RequestBody ObjectToken ob) throws ConfigurationException, IOException {	
+	public String show2(@RequestBody SetTime st) throws ConfigurationException {	
 		PropertiesConfiguration config = new PropertiesConfiguration("src\\main\\resources\\config.properties");
-		config.setProperty("ot", ob.getTimeout());
-		config.setProperty("exprient", ob.getExprient());
+		config.setProperty("ot", st.getTimeout());
+		config.setProperty("exprient", st.getExprient());
 		config.save();
-		return getPropValues();
+		return "OK";
 	}
 	
 	Integer timeout,expr = 0;
